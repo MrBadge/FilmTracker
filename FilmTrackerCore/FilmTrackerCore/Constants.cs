@@ -6,7 +6,9 @@ namespace FilmTrackerCore
 {
     internal class Constants
     {
-        private static readonly ArrayList User_Agents = new ArrayList
+        public static readonly int MAX_SEARCH_RESULT = 5;
+        
+        private static readonly List<string> User_Agents = new List<string>()
         {
             //linux
             "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.7) Gecko/20060928 (Debian|Debian-1.8.0.7-1) Epiphany/2.14",
@@ -76,10 +78,10 @@ namespace FilmTrackerCore
 
         internal class Quality
         {
-            private ArrayList names;
+            private List<string> names;
             private string Description;
 
-            public Quality(ArrayList names, string Description)
+            public Quality(List<string> names, string Description)
             {
                 this.names = names;
                 this.Description = Description;
@@ -88,13 +90,13 @@ namespace FilmTrackerCore
 
         public static readonly ArrayList VeryLowQuality = new ArrayList()
         {
-            new Quality(new ArrayList()
+            new Quality(new List<string>() 
             {
                 "CAMRip",
                 "CAM"
             },
                 "фильм, отснятый с экрана зала кинотеатра при помощи обычной камеры без точной синхронизации с проектором. Самое низкое качество из всех возможных. В некоторых фильмах видны головы других кинозрителей. Качество звука никуда не годится, возможны помехи в виде смеха публики или постороннего разговора."),
-            new Quality(new ArrayList()
+            new Quality(new List<string>() 
             {
                 "TS",
                 "TeleSync"

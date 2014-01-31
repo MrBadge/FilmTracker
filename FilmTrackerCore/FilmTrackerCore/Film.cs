@@ -11,12 +11,12 @@ namespace FilmTrackerCore
         private DateTime BluRay { get; set; }
         private DateTime premiereWorld { get; set; }
         private DateTime premiereRus { get; set; }
-        public Dictionary<string, ArrayList> InfoTable;
+        public Dictionary<string, List<string>> InfoTable;
 
         public Film(string filmName, string filmYear = "")
         {
             Id = KinopoiskSearch.GetFilmID(filmName, filmYear);
-            InfoTable = new Dictionary<string, ArrayList>();
+            InfoTable = new Dictionary<string, List<string>>();
             KinopoiskSearch.GetFilmInfo(this);
             if (InfoTable.ContainsKey("премьера (мир)"))
             {
@@ -34,7 +34,7 @@ namespace FilmTrackerCore
             {
                 BluRay = DateTime.Parse((string) InfoTable["релиз на Blu-Ray"][0]);
             }
-            Console.ReadKey(); //DEBUG
+            //Console.ReadKey(); //DEBUG
         }
     }
 }

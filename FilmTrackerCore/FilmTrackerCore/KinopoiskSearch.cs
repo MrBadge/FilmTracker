@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -25,16 +26,7 @@ namespace FilmTrackerCore
         {
             var uri = new Uri("http://www.kinopoisk.ru/s/type/film/find/" + movieName + "/m_act%5Byear%5D/" +
                               movieYear + '/');
-            return ParseID(Tools.GetURIContent(uri, "windows-1251"));
-        }
-
-        //FOR DEBUG!!
-        private static void Save(string str, string filename)
-        {
-            var f = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.Write),
-                Encoding.GetEncoding("windows-1251"));
-            f.WriteLine(str);
-            f.Close();
+            return ParseID(Tools.GetURIContent(uri));
         }
 
         public static void GetFilmInfo(Film film)
@@ -42,7 +34,7 @@ namespace FilmTrackerCore
             if (film.Id == -1)
                 return;
             var uri = new Uri("http://www.kinopoisk.ru/film/" + Convert.ToString(film.Id) + '/');
-            string HTMLCode = Tools.GetURIContent(uri, "windows-1251");
+            string HTMLCode = Tools.GetURIContent(uri);
             ParseInfoTable(HTMLCode, film);
         }
 
@@ -65,14 +57,14 @@ namespace FilmTrackerCore
             if (!correct) return;
             htmlCode = htmlCode.Substring(htmlCode.IndexOf("class=\"moviename-big\" itemprop=\"name\""));
             Match name_tmp = for_name.Match(htmlCode);
-            film.InfoTable.Add("название",
-                new ArrayList
+            film.InfoTable.Add("name",
+                new List<string>()
                 {
                     MakeValueClear(name_tmp.Value),
                     MakeValueClear(name_tmp.NextMatch().Value)
                 });
             SetPosterInfo(film);
-            Console.WriteLine(film.InfoTable["название"][0]); //DEBUG
+            Console.WriteLine(film.InfoTable["name"][0]); //DEBUG
             htmlCode = htmlCode.Substring(htmlCode.IndexOf("<div id=\"infoTable\">"));
             htmlCode = htmlCode.Substring(htmlCode.IndexOf("<table class=\"info\">"));
             htmlCode = htmlCode.Substring(0, htmlCode.IndexOf("</table>") + "</table>".Length);
@@ -96,7 +88,7 @@ namespace FilmTrackerCore
                         {
                             if (key && Constants.KeyWords.ContainsKey(tmp))
                             {
-                                film.InfoTable.Add(tmp, new ArrayList());
+                                film.InfoTable.Add(Constants.KeyWords[tmp], new List<string>());
                                 cur_key = tmp;
                                 key = false;
                             }
@@ -104,7 +96,7 @@ namespace FilmTrackerCore
                             {
                                 if (!key)
                                 {
-                                    film.InfoTable[cur_key].Add(tmp);
+                                    film.InfoTable[Constants.KeyWords[cur_key]].Add(tmp);
                                 }
                             }
                             Console.WriteLine(tmp); //DEBUG
@@ -120,7 +112,7 @@ namespace FilmTrackerCore
 
         private static void SetPosterInfo(Film film)
         {
-            film.InfoTable.Add("постер", new ArrayList
+            film.InfoTable.Add("poster", new List<string>()
             {
                 "www.kinopoisk.ru/images/film_big/" + film.Id + ".jpg",
                 "www.kinopoisk.ru/images/film/" + film.Id + ".jpg"
