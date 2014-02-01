@@ -18,21 +18,21 @@ namespace FilmTrackerCore
             Id = KinopoiskSearch.GetFilmID(filmName, filmYear);
             InfoTable = new Dictionary<string, List<string>>();
             KinopoiskSearch.GetFilmInfo(this);
-            if (InfoTable.ContainsKey("премьера (мир)"))
+            if (InfoTable.ContainsKey("premiere (world)"))
             {
-                premiereWorld = DateTime.Parse((string) InfoTable["премьера (мир)"][0]);
+                premiereWorld = DateTime.Parse(InfoTable["premiere (world)"][0]);
             }
-            if (InfoTable.ContainsKey("премьера (РФ)"))
+            if (InfoTable.ContainsKey("premiere (Russia)"))
             {
-                premiereRus = DateTime.Parse((string) InfoTable["премьера (РФ)"][0]);
+                premiereRus = DateTime.Parse(InfoTable["premiere (Russia)"][0]);
             }
-            if (InfoTable.ContainsKey("релиз на DVD"))
+            if (InfoTable.ContainsKey("DVD"))
             {
-                DVD = DateTime.Parse((string) InfoTable["релиз на DVD"][0]);
+                DVD = DateTime.Parse(InfoTable["DVD"][0]);
             }
-            if (InfoTable.ContainsKey("релиз на Blu-Ray"))
+            if (InfoTable.ContainsKey("Blu-Ray"))
             {
-                BluRay = DateTime.Parse((string) InfoTable["релиз на Blu-Ray"][0]);
+                BluRay = DateTime.Parse(InfoTable["Blu-Ray"][0]);
             }
             //Console.ReadKey(); //DEBUG
         }

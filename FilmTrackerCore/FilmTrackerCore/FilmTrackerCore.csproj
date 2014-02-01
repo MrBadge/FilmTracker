@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FilmTrackerCore</RootNamespace>
     <AssemblyName>FilmTrackerCore</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -26,6 +26,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -59,8 +60,31 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Film.cs" />
     <Compile Include="KinopoiskSearch.cs" />
+    <Compile Include="MobileHTMLAgilityPack\crc32.cs" />
+    <Compile Include="MobileHTMLAgilityPack\EncodingFoundException.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlAttribute.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlAttributeCollection.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlCommentNode.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlDocument.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlElementFlag.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlEntity.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlNameTable.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlNode.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlNodeCollection.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlNodeType.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlParseError.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlParseErrorCode.cs" />
+    <Compile Include="MobileHTMLAgilityPack\HtmlTextNode.cs" />
+    <Compile Include="MobileHTMLAgilityPack\MixedCodeDocument.cs" />
+    <Compile Include="MobileHTMLAgilityPack\MixedCodeDocumentCodeFragment.cs" />
+    <Compile Include="MobileHTMLAgilityPack\MixedCodeDocumentFragment.cs" />
+    <Compile Include="MobileHTMLAgilityPack\MixedCodeDocumentFragmentList.cs" />
+    <Compile Include="MobileHTMLAgilityPack\MixedCodeDocumentFragmentType.cs" />
+    <Compile Include="MobileHTMLAgilityPack\MixedCodeDocumentTextFragment.cs" />
+    <Compile Include="MobileHTMLAgilityPack\NameValuePairList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="TrackerSearch.cs" />
     <Compile Include="TrackerTopic.cs" />
