@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace FilmTrackerCore
 {
     internal class Constants
-    {
-        public static readonly int MAX_SEARCH_RESULT = 5;
-        
+    {   
         private static readonly List<string> User_Agents = new List<string>()
         {
             //linux
@@ -76,32 +75,56 @@ namespace FilmTrackerCore
             "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.19.4 (KHTML, like Gecko) Version/5.0.2 Safari/533.18.5"
         };
 
-        internal class Quality
+        /*internal class Quality
         {
             private List<string> names;
             private string Description;
+            private string Type;
 
-            public Quality(List<string> names, string Description)
+            public Quality(List<string> names, string type, string Description)
             {
                 this.names = names;
                 this.Description = Description;
+                this.Type = type;
             }
-        }
+        }*/
 
-        public static readonly ArrayList VeryLowQuality = new ArrayList()
+        internal class QualitiesList
         {
-            new Quality(new List<string>() 
+            public static readonly string VeryLow = "Very Low";
+            public static readonly string Low = "Low";
+            public static readonly string Average = "Average";
+            public static readonly string Good = "Good";
+            public static readonly string GoodPlus = "Better, than good";
+            public static readonly string Best = "The Best";
+        }
+        
+
+        /*public static readonly IList<String> QualitiesList = new ReadOnlyCollection<string>
+            (new List<String>
+            {
+                "Very Low",
+                "Low",
+                "Average",
+                "Good",
+                "Better, than Good",
+                "The Best"
+            });*/
+
+        public static readonly Dictionary<string, Tuple<List<string>, string, string>> Qualities = new Dictionary
+            <string, Tuple<List<string>, string, string>>()
+        {
             {
                 "CAMRip",
-                "CAM"
+                new Tuple<List<string>, string, string>(new List<string>() {"CAM"}, QualitiesList.VeryLow,
+                    "фильм, отснятый с экрана зала кинотеатра при помощи обычной камеры без точной синхронизации с проектором. Самое низкое качество из всех возможных. В некоторых фильмах видны головы других кинозрителей. Качество звука никуда не годится, возможны помехи в виде смеха публики или постороннего разговора")
             },
-                "фильм, отснятый с экрана зала кинотеатра при помощи обычной камеры без точной синхронизации с проектором. Самое низкое качество из всех возможных. В некоторых фильмах видны головы других кинозрителей. Качество звука никуда не годится, возможны помехи в виде смеха публики или постороннего разговора."),
-            new Quality(new List<string>() 
             {
                 "TS",
-                "TeleSync"
-            },
-                "запись профессиональной (цифровой) камерой, установленной на штатив в пустом кинотеатре с экрана. Съёмка производится с синхронизацией, при которой камера получает от проекционного оборудования сигнал, позволяющий точно определить момент полного открытия обтюратора проектора. Качество чуть лучше, чем с простой камеры. Звук записывается напрямую с проектора или с другого отдельного выхода, например, гнездо для наушников в кресле (как в самолёте). Звук, записанный таким образом, получается более-менее приемлемого качества и без помех. Как правило, звук в режиме стерео.")
+                new Tuple<List<string>, string, string>(new List<string>() {"TeleSync"}, QualitiesList.VeryLow,
+                    "запись профессиональной (цифровой) камерой, установленной на штатив в пустом кинотеатре с экрана. Съёмка производится с синхронизацией, при которой камера получает от проекционного оборудования сигнал, позволяющий точно определить момент полного открытия обтюратора проектора. Качество чуть лучше, чем с простой камеры. Звук записывается напрямую с проектора или с другого отдельного выхода, например, гнездо для наушников в кресле (как в самолёте). Звук, записанный таким образом, получается более-менее приемлемого качества и без помех. Как правило, звук в режиме стерео")
+            }
+
         };
 
         /*public static readonly Dictionary<string, string> VeryLowQuality = new Dictionary<string, string>()
@@ -147,12 +170,12 @@ namespace FilmTrackerCore
             {"релиз на Blu-Ray", "Blu-Ray"},
             {"релиз на DVD", "DVD"},
             {"время", "duration"}
-        }; 
+        };
 
         public static string GetRandUserAgent()
         {
             var rnd = new Random();
-            return (string)User_Agents[rnd.Next(User_Agents.Count)];
+            return User_Agents[rnd.Next(User_Agents.Count)];
         }
 
     }
